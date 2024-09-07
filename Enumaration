@@ -1,0 +1,112 @@
+Enumaration
+
+Wednesday, August 21, 2024
+4:44 PM
+
+Ethical hackers or penetration testers use several tools and techniques to enumerate the target network. Recommended labs that will assist you in learning various enumeration techniques include:
+
+Perform NetBIOS enumeration
+
+Perform NetBIOS enumeration using Windows command-line utilities
+Perform NetBIOS enumeration using NetBIOS Enumerator
+Perform NetBIOS enumeration using an NSE Script
+Perform SNMP enumeration
+
+Perform SNMP enumeration using snmp-check
+Perform SNMP enumeration using SoftPerfect Network Scanner
+Perform SNMP enumeration using SnmpWalk
+Perform SNMP enumeration using Nmap
+Perform LDAP enumeration
+
+Perform LDAP enumeration using Active Directory Explorer (AD Explorer)
+Perform LDAP enumeration using Python and Nmap
+Perform LDAP enumeration using ldapsearch
+Perform NFS enumeration
+
+Perform NFS enumeration using RPCScan and SuperEnum
+Perform DNS enumeration
+
+Perform DNS enumeration using zone transfer
+Perform DNS enumeration using DNSSEC zone walking
+Perform DNS enumeration using Nmap
+Perform SMTP Enumeration
+
+Perform SMTP enumeration using Nmap
+Perform RPC, SMB, and FTP enumeration
+
+Perform SMB and RPC enumeration using NetScanTools Pro
+Perform RPC, SMB, and FTP enumeration using Nmap
+Perform enumeration using various enumeration tools
+
+Enumerate information using Global Network Inventory
+Enumerate network resources using Advanced IP Scanner
+Enumerate information from Windows and Samba hosts using Enum4linux
+
+-------------------------
+	1. nbtstat -a [IP address of the remote machine]   => -a displays the NetBIOS name table of a remote computer.
+	2. nbtstat -c      => -c lists the contents of the NetBIOS name cache of the remote computer.
+	3. net use and press Enter. The output displays information about the target such as connection status, shared folder/drive and network information,
+	4.  nmap -sV -v --script nbstat.nse [Target IP Address]   => -sV detects the service versions, -v enables the verbose output 
+	5.  nmap -sU -p 137 --script nbstat.nse [Target IP Address]  =>  -sU performs a UDP scan, -p specifies the port to be scanned, and --script nbstat.nse
+
+------SNMP-----
+	1.  nmap -sU -p 161 [Target IP address]      => -sU performs a UDP scan and -p specifies the port to be scanned.
+	2. snmp-check [Target IP Address]     => List Network information, Network interfaces, Network IP and Routing information, and TCP connections and listening ports. Processes, Storage information, File system information, Device information, Share, 
+	3. snmpwalk -v1 -c public [target IP]   => –v: specifies the SNMP version number (1 or 2c or 3) and –c: sets a community string.
+	4. nmap -sU -p 161 --script=snmp-sysdescr [target IP Address] => -sU: specifies a UDP scan, -p: specifies the port to be scanned, and -–script: is an argument used to execute a given script (here, snmp-sysdescr).
+	5. nmap -sU -p 161 --script=snmp-processes [target IP Address]   => -sU: specifies UDP scan, -p: specifies the port to be scanned, and -–script:
+	6. nmap -sU -p 161 --script=snmp-win32-software [target IP Address] 
+	7. nmap -sU -p 161 --script=snmp-interfaces [target IP Address]
+
+-------Active Directory----------
+	1. Active Directory Explorer and double-click ADExplorer.exe.
+	2. nmap -sU -p 389 [Target IP address] 
+	3.  nmap -p 389 --script ldap-brute --script-args ldap.base='"cn=users,dc=CEH,dc=com"' [Target IP Address] 
+		a. -p: specifies the port to be scanned, ldap-brute: to perform brute-force LDAP authentication. ldap.base: if set, the script will use it as a base for the password guessing attempts.
+	--------
+		a. Type python3 and press Enter to open a python3 shell.
+		b. import ldap3 and press Enter to import LDAP. and press Enter to import LDAP.
+		c. server=ldap3.Server(’[Target IP Address]’, get_info=ldap3.ALL,port=[Target Port]) 
+		d. connection=ldap3.Connection(server) and press Enter.
+		e. connection.bind() and press Enter 
+		f. server.info and press Enter
+		g.  connection.search(search_base='DC=CEH,DC=com', search_filter='(&(objectclass=*))', search_scope='SUBTREE', attributes='*')  
+		h. connection.entries and press Enter
+		i.  connection.search(search_base='DC=CEH,DC=com', search_filter='(&(objectclass=person))', search_scope='SUBTREE', attributes='userpassword')  
+		j.  connection.entries
+	-------------
+	4. ldapsearch -h [Target IP Address] -x -s base namingcontexts    => -x: specifies simple authentication, -h: specifies the host, and -s: specifies the scope.
+	5. ldapsearch -h [Target IP Address] -x -b “DC=CEH,DC=com”   =>  -x: specifies simple authentication, -h: specifies the host, and -b: specifies the base DN for search.
+	6.  ldapsearch -x -h [Target IP Address] -b "DC=CEH,DC=com" "objectclass=*" 
+	7. 
+	------NFS Enumeration ----
+	
+	8. nmap -p 2049 [Target IP Address] 
+	9. ./superenum and press Enter. Under Enter IP List filename with path, type Target.txt,
+	10. python3 rpc-scan.py [Target IP address] --rpc   => --rpc: lists the RPC (portmapper).
+
+-------------DNS Enumeration -----
+	1. dig ns [Target Domain]
+	2. dig @[[NameServer]] [[Target Domain]] axfr => axfr retrieves zone information.
+	3. nslookup interactive mode, type ls -d [Name Server]  =>  ls -d requests a zone transfer of the specified name server.
+	4.  ./dnsrecon.py -d [Target domain] -z  =>  -d specifies the target domain and -z specifies that the DNSSEC zone walk be performed with standard enumeration.
+	5. nmap --script=broadcast-dns-service-discovery [Target Domain]  => 
+	6. nmap -T4 -p 53 --script dns-brute [Target Domain]  =>  -T4: specifies the timing template, -p: specifies the target port.
+	7.  nmap --script dns-srv-enum --script-args "dns-srv-enum.domain='[Target Domain]'”  =>  result appears displaying various common service (SRV) records for a given domain name
+	8. 
+------  SMTP Enumeration  -------
+
+	1. nmap -p 25 --script=smtp-enum-users [Target IP Address] 
+	2. nmap -p 25 --script=smtp-open-relay [Target IP Address]
+
+---FTP Enum ---
+	1. nmap -p 21 [Target IP Address]
+	2. nmap -T4 -A [Target IP Address]
+
+--- ENUM Tools
+
+	1.  Global Network Inventory
+	2. Advanced IP Scanner 
+	3. enum4linux -h and press Enter to view the various options available with enum4linux.
+		a. enum4linux -u martin -p apple -U [Target IP Address] 
+	
