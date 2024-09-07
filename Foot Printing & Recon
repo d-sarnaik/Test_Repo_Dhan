@@ -1,0 +1,78 @@
+Foot Printing & Recon 
+
+  1) https://mattw.io/youtube-metadata/    => Find youtube Image source 
+	2)  https://www.searchftps.net/         => FTP Search
+	3) https://www.shodan.io/       => IoT Search
+	4) Find the Company’s Domains and Sub-domains using Netcraft =
+	5)  Gather Personal Information using PeekYou Online People Search Service
+	6) Gather an Email List using theHarvester - "theHarvester -d microsoft.com -l 200 -b baidu"  ,  "theHarvester -d eccouncil -l 200 -b linkedin"
+	7)  Gather Information using Deep and Dark Web Searching => Tor browser
+	8)  Determine Target OS Through Passive Footprinting  : https://search.censys.io/?q=
+	9) Gather Personal Information from Various Social Networking Sites using Sherlock  "sherlock "satya nadella""
+	10) Gather Information About a Target Website using Ping Command Line Utility 
+		a. ping www.certifiedhacker.com -f -l 1300 
+	11) Gather Information about a Target Website using Photon 
+		a. python3 photon.py -u http://www.certifiedhacker.com 
+		b.  python3 photon.py -u http://www.certifiedhacker.com -l 3 -t 200 --wayback
+			-u: specifies the target website (here, www.certifiedhacker.com)
+			-l: specifies level to crawl (here, 3)
+			-t: specifies number of threads (here, 200)
+			--wayback: specifes using URLs from archive.org as seeds
+	12) Gather Information About a Target Website using Central Ops
+		a. https://centralops.net
+		b. You can also use tools such as Website Informer (https://website.informer.com), Burp Suite (https://portswigger.net), Zaproxy (https://www.zaproxy.org)
+	13) Extract a Company’s Data using Web Data Extractor
+		a. Windows tool "Web Data Extractor Pro"  to download website 
+		b. WDEPro use Meta Tag tab to view the URL, Title, Keywords, Description, Host, Domain, page size, etc.
+	14) Mirror a Target Website using HTTrack Web Site Copier (Windows tool to copy website)
+	15) Gather Information About a Target Website using Grecon. GRecon is a Python tool that can be used to run Google search queries to perform reconnaissance on a target to find subdomains, sub-subdomains, login pages, directory listings, exposed documents, and WordPress entries.
+		a. "python3 grecon.py"
+	16) Gather a Wordlist from the Target Website using CeWL 
+		a. "cewl -d 2 -m 5 https://www.certifiedhacker.com"
+		b. -d represents the depth to spider the website (here, 2) and -m represents minimum word length (here, 5).
+	17) Perform Whois Lookup using DomainTools http://whois.domaintools.com
+	18) Gather DNS Information using nslookup Command Line Utility and Online Tool
+	19) http://www.kloth.net/services/nslookup.php
+	20) Perform Reverse DNS Lookup using Reverse IP Domain Check and DNSRecon. 
+		a. "./dnsrecon.py -r 162.241.216.0-162.241.216.255"
+	21) Perform Network Footprinting (Ping, Trace)
+	22) Perform Footprinting using Various Footprinting Tools
+		a. Terminal window, type the command recon-ng
+		b. marketplace install all
+		c. modules search   => displays all the modules available in recon-ng.
+		d. workspaces create CEH  => This creates a workspace named CEH.
+		e. db insert domains  => Add domain 
+		f. modules load brute and press Enter to view all the modules related to brute forcing. In this task, we will be using the recon/domains-hosts/brute_hosts module to harvest hosts.
+		g.  modules load recon/domains-hosts/brute_hosts
+		h. ----
+		i. modules load reverse_resolve
+		j.  modules load recon/hosts-hosts/reverse_resolve
+		k. Run
+		l. ---
+		m. workspaces create reconnaissance
+		n. modules load recon/domains-contacts/whois_pocs 
+		o.  info command and press Enter to view the options required to run this module.
+		p. options set SOURCE facebook.com
+		q. Run
+		r. -------
+		s. To extract a list of subdomains and IP addresses associated with the target URL, we need to load the recon/domains-hosts/hackertarget module.
+		t. modules load recon/domains-hosts/hackertarget
+		u. options set SOURCE certifiedhacker.com
+		v. Run
+	23) Footprinting a Target using OSRFramework
+		a. domainfy -n [Domain Name] -t all
+		b. -n: specifies a nickname or a list of nicknames to be checked. -t: specifies a list of top-level domains where nickname will be searched.
+		c. --
+		d. searchfy -q "target user name or profile name"
+		usufy - Gathers registered accounts with given usernames.
+		mailfy – Gathers information about email accounts
+		phonefy – Checks for the existence of a given series of phones
+		entify – Extracts entities using regular expressions from provided URLs
+	24) Footprinting a Target using FOCA
+		a. FOCA (Fingerprinting Organizations with Collected Archives) is a tool that reveals metadata and hidden information in scanned documents. These documents are searched for using three search engines: Google, Bing, and DuckDuckGo. 
+	25) Footprinting a Target using BillCipher
+		a. "python3 billcipher.py"
+		Are you want to collect information of website or IP address? option, type website and press Enter.
+	26) Footprinting a Target using OSINT Framework
+		a. https://osintframework.com/
+		
