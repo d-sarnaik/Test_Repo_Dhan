@@ -1,0 +1,28 @@
+	• Ethical hackers or penetration testers use numerous tools and techniques to perform social engineering tests. The recommended labs that will assist you in learning various social engineering techniques are:
+
+	• Perform social engineering using various techniques
+
+	• Sniff credentials using the Social-Engineer Toolkit (SET)
+	• Detect a phishing attack
+
+	• Detect phishing using Netcraft
+	• Detect phishing using PhishTank
+	• Audit organization's security for phishing attacks
+
+	• Audit organization's security for phishing attacks using OhPhish
+	
+	
+	----Sniff Credentials using the Social-Engineer Toolkit (SET)
+	
+	cd social-engineer-toolkit
+	 ./setoolkit and press Enter to launch Social-Engineer Toolkit.
+	
+	
+	---Detect a Phishing Attack
+	
+	• Detect phishing using Netcraft
+	• Detect phishing using PhishTank
+	
+	----Audit Organization's Security for Phishing Attacks using OhPhish
+	
+	
