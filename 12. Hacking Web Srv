@@ -1,0 +1,52 @@
+Footprint the web server
+
+	• Information gathering using Ghost Eye
+	• Perform web server reconnaissance using Skipfish
+	• Footprint a web server using the httprecon Tool
+	• Footprint a web server using Netcat and Telnet
+	• Enumerate web server information using Nmap Scripting Engine (NSE)
+	• Uniscan web server fingerprinting in Parrot Security
+	• Perform a web server attack
+
+	• Crack FTP credentials using a Dictionary Attack
+	
+-----------------------
+
+Information Gathering using Ghost Eye
+
+pip3 install -r requirements.txt
+python3 ghost_eye.py
+
+Perform Web Server Reconnaissance using Skipfish
+skipfish -o /home/attacker/test -S /usr/share/skipfish/dictionaries/complete.wl http://[IP Address of Windows Server 2022]:8080 
+
+Footprint a Web Server using the httprecon Tool
+Navigate to E:\CEH-Tools\CEHv12 Module 13 Hacking Web Servers\Web Server Footprinting Tools\httprecon, right-click httprecon.exe, and, from the context menu, click Run as administrator double-click to launch the application.
+
+Footprint a Web Server using Netcat and Telnet
+nc -vv www.moviescope.com 80
+GET / HTTP/1.0 and press Enter twice.
+Netcat will perform the banner grabbing and gather information such as content type, last modified date, accept ranges, ETag, and server information.
+
+ telnet www.moviescope.com 80
+GET / HTTP/1.0
+
+Enumerate Web Server Information using Nmap Scripting Engine (NSE)
+nmap -sV --script=http-enum [target website]
+nmap --script hostmap-bfk -script-args hostmap-bfk.prefix=hostmap- www.goodshopping.com
+nmap --script http-trace -d www.goodshopping.com
+check whether Web Application Firewall is configured on the target host or domain. In the terminal window, type nmap -p80 --script http-waf-detect www.goodshopping.com
+
+
+Uniscan Web Server Fingerprinting in Parrot Security
+uniscan -h
+uniscan -u http://10.10.1.22:8080/CEH -q and hit Enter to start scanning for directories.
+uniscan using two options together. Here -w and -e are used together to enable the file check (robots.txt and sitemap.xml file).
+dynamic testing option by giving the command -d. Type uniscan -u http://10.10.1.22:8080/CEH -d and hit Enter to start a dynamic scan on the web server.
+
+-----------
+Crack FTP Credentials using a Dictionary Attack
+nmap -p 21 [IP Address of Windows 11]
+ hydra -L /home/attacker/Desktop/Wordlists/Usernames.txt -P /home/attacker/Desktop/Wordlists/Passwords.txt ftp://[IP Address of Windows 11] 
+
+
