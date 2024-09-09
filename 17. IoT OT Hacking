@@ -1,0 +1,24 @@
+Lab Tasks
+Ethical hackers or pen testers use numerous tools and techniques to hack the target IoT and OT platforms. Recommended labs that will assist you in learning various IoT platform hacking techniques include:
+
+Perform footprinting using various footprinting techniques
+
+Gather information using online footprinting tools
+	• Capture and analyze IoT device traffic
+	• Capture and analyze IoT traffic using Wireshark
+	
+
+	1) Perform Footprinting using Various Footprinting Techniques
+
+	• Gather Information using Online Footprinting Tools
+	• we will focus on performing footprinting on the MQTT protocol, which is a machine-to-machine (M2M)/“Internet of Things” connectivity protocol. It is useful for connections with remote locations where a small code footprint is required and/or network bandwidth is at a premium.
+
+	• Open a new tab and type https://www.google.com in the address bar, and press Enter.
+	• In the search field, type "login" intitle:"scada login" and click the Google Search button.
+
+	• https://account.shodan.io/login
+
+
+	2) Capture and Analyze IoT Device Traffic
+	
+
